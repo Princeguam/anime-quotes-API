@@ -1,0 +1,11 @@
+#ignore this folder
+Clean_JSON_file/
+
+#ignore the env file
+.env
+
+#ignore the local virtual environment
+venv/
+
+#ignore the .idea folder
+.idea/
