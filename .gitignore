@@ -10,4 +10,4 @@ venv/
 #ignore the .idea folder
 .idea/
 
-__pycache_/
+pycache/*
