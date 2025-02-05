@@ -35,64 +35,34 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #CODE TO CONVERT CSV TO JSON
 
-import csv
-import json
+# import csv
+# import json
 
-def csv_to_json(csv_path, json_path):
-    """
-    Convert CSV file to JSON file.
+# def csv_to_json(csv_path, json_path):
+#     """
+#     Convert CSV file to JSON file.
     
-    Args:
-        csv_file (str): Path to the input CSV file.
-        json_file (str): Path to the output JSON file.
-    """
-    # Read CSV file and convert to list of dictionaries
-    with open(csv_path, 'r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file)
-        data = list(reader)
+#     Args:
+#         csv_file (str): Path to the input CSV file.
+#         json_file (str): Path to the output JSON file.
+#     """
+#     # Read CSV file and convert to list of dictionaries
+#     with open(csv_path, 'r', newline='', encoding='utf-8') as file:
+#         reader = csv.DictReader(file)
+#         data = list(reader)
     
-    # Write JSON data to file
-    with open(json_path, 'w', encoding='utf-8') as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+#     # Write JSON data to file
+#     with open(json_path, 'w', encoding='utf-8') as file:
+#         json.dump(data, file, indent=4, ensure_ascii=False)
 
 
 
-csv_path = r'dataset_output.csv'
-json_path = r'dataset_output.json'
+# csv_path = r'anyjson_download.csv'
+# json_path = r'anyjson_download.json'
 
-csv_to_json(csv_path, json_path)
-
-
-
-
-
-
-
-
-
-
+# csv_to_json(csv_path, json_path)
 
 
 
@@ -131,3 +101,4 @@ csv_to_json(csv_path, json_path)
 #             writer.writerow(row)
 
 # print(f"Processed CSV saved to {output_file}")
+

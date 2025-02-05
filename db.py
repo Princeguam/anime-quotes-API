@@ -5,10 +5,11 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+db_uri = getenv('DB_URI')
 
 # CONNECT TO THE MONGODB ATLAS USING THE URI
 
-connect('quoteDB',getenv('DB_URI'))
+connect('quoteDB', host=db_uri)
 
 # remember to create a .env file and add it to your .gitignore
 
@@ -25,9 +26,10 @@ class Entry(Document):
         {'fields':['$quote','$anime_name','$character_name'],
          'default_language':'english',
          'weights':{'quote': 3}
+         
         }
         ]}
-
+# when improving this api, add weights on both the character name and the anime name, in order to improve the search results when searching the texts.
 
     def to_db (self):
         return{
