@@ -16,6 +16,13 @@ db_total = len(entry)
 
 
 # routes
+@app.route('/api/docu/')
+def documentation():
+    return render_template('index.html')
+    # entry = Entry.objects().all()
+    # return f"total number of quotes in the database is {len(entry)}"
+
+
 @app.route('/api/v1')
 def home():
     entry = Entry.objects().all()

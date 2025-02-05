@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AniQuote API Documentation</title>
+    <link rel="icon" type="png" href="/static/icons8-anime-16.png " />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="/static/scripts.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4caf50;
+        color: white;
+        padding: 16px;
+        border-radius: 4px;
+        z-index: 1000;
+      }
+      .copy-container {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .copy-btn {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        color: #a8b3cf;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.2s;
+      }
+      .copy-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <nav class="fixed top-0 left-0 right-0 bg-white border-b z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <span
+              class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            >
+              AniQuote API
+            </span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a
+              href="#"
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="pt-16 lg:flex">
+      <!-- Sidebar -->
+      <aside
+        class="lg:w-64 lg:fixed lg:h-screen bg-white border-r p-4 overflow-y-auto"
+      >
+        <nav class="space-y-2">
+          <a
+            href="#introduction"
+            class="block px-3 py-2 text-sm rounded-lg hover:bg-gray-100"
+            >Introduction</a
+          >
+          <a
+            href="#authentication"
+            class="block px-3 py-2 text-sm rounded-lg hover:bg-gray-100"
+            >Authentication</a
+          >
+          <a
+            href="#endpoints"
+            class="block px-3 py-2 text-sm rounded-lg hover:bg-gray-100"
+            >Endpoints</a
+          >
+          <a
+            href="#versions"
+            class="block px-3 py-2 text-sm rounded-lg hover:bg-gray-100"
+            >API Versions</a
+          >
+          <a
+            href="#support"
+            class="block px-3 py-2 text-sm rounded-lg hover:bg-gray-100"
+            >Support</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main class="lg:ml-64 p-8">
+        <div class="max-w-4xl mx-auto">
+          <!-- Introduction -->
+          <section id="introduction" class="mb-16">
+            <h1 class="text-4xl font-bold mb-6">Introduction</h1>
+            <div class="prose max-w-none">
+              <p class="text-gray-600 mb-4">
+                Welcome to the Anime Quotes API. This API allows you to fetch
+                quotes from various anime, search for quotes by keywords,
+                retrieve random quotes, and more.
+              </p>
+              <div class="bg-gray-900 rounded-lg p-4 mb-6">
+                <p class="text-blue-400 font-mono">Base URL:</p>
+                <code class="text-green-400 font-mono" id="base-url"
+                  >https://aniquoteapi/api/v1.com</code
+                >
+                <div class="copy-container">
+                  <button class="copy-btn" data-clipboard-target="#base-url">
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Endpoints -->
+          <section id="endpoints" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6">Endpoints</h2>
+
+            <!-- Fetch by Anime -->
+            <div class="mb-8 bg-white rounded-lg shadow-sm border p-6">
+              <h3 class="text-xl font-semibold mb-4">
+                Fetch quotes by Anime name
+              </h3>
+              <div class="space-y-4">
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <div class="copy-container">
+                    <p class="text-purple-400 font-mono" id="anime-endpoint">
+                      GET /api/v1/quotes/anime
+                    </p>
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#anime-endpoint"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+                <div class="bg-gray-50 border rounded-lg p-4">
+                  <h4 class="font-semibold mb-2">Parameters</h4>
+                  <table class="w-full">
+                    <tr class="border-b">
+                      <td class="py-2 font-mono text-sm">anime_name</td>
+                      <td class="py-2 text-sm text-gray-600">string</td>
+                      <td class="py-2 text-sm text-gray-600">
+                        The name of the anime eg: One piece
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <p class="text-blue-400 font-mono">Sample request:</p>
+                  <code class="text-green-400 font-mono" id="anime-sample"
+                    >GET /api/v1/quotes/anime?name=One piece</code
+                  >
+                  <div class="copy-container">
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#anime-sample"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Get Quote by ID -->
+            <div class="mb-8 bg-white rounded-lg shadow-sm border p-6">
+              <h3 class="text-xl font-semibold mb-4">Get Quote by ID</h3>
+              <div class="space-y-4">
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <div class="copy-container">
+                    <p class="text-purple-400 font-mono" id="id-endpoint">
+                      GET /api/v1/quotes/ID
+                    </p>
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#id-endpoint"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+                <div class="bg-gray-50 border rounded-lg p-4">
+                  <h4 class="font-semibold mb-2">Parameters</h4>
+                  <table class="w-full">
+                    <tr class="border-b">
+                      <td class="py-2 font-mono text-sm">id</td>
+                      <td class="py-2 text-sm text-gray-600">integer</td>
+                      <td class="py-2 text-sm text-gray-600">
+                        The unique identifier of the quote
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <p class="text-blue-400 font-mono">Sample request:</p>
+                  <code class="text-green-400 font-mono" id="id-sample"
+                    >GET /api/v1/quotes/ID?id=123</code
+                  >
+                  <div class="copy-container">
+                    <button class="copy-btn" data-clipboard-target="#id-sample">
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Random Quotes -->
+            <div class="mb-8 bg-white rounded-lg shadow-sm border p-6">
+              <h3 class="text-xl font-semibold mb-4">Fetch Random Quotes</h3>
+              <div class="bg-gray-900 rounded-lg p-4">
+                <div class="copy-container">
+                  <p class="text-purple-400 font-mono" id="random-endpoint">
+                    GET /api/v1/quotes/random
+                  </p>
+                  <button
+                    class="copy-btn"
+                    data-clipboard-target="#random-endpoint"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Character Quotes -->
+            <div class="mb-8 bg-white rounded-lg shadow-sm border p-6">
+              <h3 class="text-xl font-semibold mb-4">
+                Fetch quotes by Character name
+              </h3>
+              <div class="space-y-4">
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <div class="copy-container">
+                    <p
+                      class="text-purple-400 font-mono"
+                      id="character-endpoint"
+                    >
+                      GET /api/v1/quotes/character
+                    </p>
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#character-endpoint"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+                <div class="bg-gray-50 border rounded-lg p-4">
+                  <h4 class="font-semibold mb-2">Parameters</h4>
+                  <table class="w-full">
+                    <tr class="border-b">
+                      <td class="py-2 font-mono text-sm">ch_name</td>
+                      <td class="py-2 text-sm text-gray-600">string</td>
+                      <td class="py-2 text-sm text-gray-600">
+                        The name of the character (e.g., "Monkey D. Luffy",
+                        "Goku")
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <p class="text-blue-400 font-mono">Sample request:</p>
+                  <code class="text-green-400 font-mono" id="character-sample"
+                    >GET /api/v1/quotes/character?ch_name=levi</code
+                  >
+                  <div class="copy-container">
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#character-sample"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Keyword Search -->
+            <div class="mb-8 bg-white rounded-lg shadow-sm border p-6">
+              <h3 class="text-xl font-semibold mb-4">
+                Search Quotes by Keyword
+              </h3>
+              <div class="space-y-4">
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <div class="copy-container">
+                    <p class="text-purple-400 font-mono" id="search-endpoint">
+                      GET /api/v1/quotes/search
+                    </p>
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#search-endpoint"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+                <div class="bg-gray-50 border rounded-lg p-4">
+                  <h4 class="font-semibold mb-2">Parameters</h4>
+                  <table class="w-full">
+                    <tr class="border-b">
+                      <td class="py-2 font-mono text-sm">text</td>
+                      <td class="py-2 text-sm text-gray-600">string</td>
+                      <td class="py-2 text-sm text-gray-600">
+                        Search text matching quotes, anime names, or character
+                        names
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <p class="text-blue-400 font-mono">Sample request:</p>
+                  <code class="text-green-400 font-mono" id="search-sample"
+                    >GET /api/v1/quotes/search?text=heavy</code
+                  >
+                  <div class="copy-container">
+                    <button
+                      class="copy-btn"
+                      data-clipboard-target="#search-sample"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- API Versions -->
+          <section id="versions" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6">API Versions</h2>
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+              <div class="space-y-4">
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <h4 class="font-semibold mb-2">Current Version: V1</h4>
+                  <p class="text-gray-600">
+                    The current version includes basic authentication and rate
+                    limiting. Enhanced security features will be added in future
+                    updates.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Support -->
+          <section id="support" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6">Support</h2>
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+              <p class="text-gray-600 mb-4">
+                The API and site will always remain free to access at all
+                levels.
+              </p>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-semibold mb-2">Contact</h4>
+                <p class="text-blue-500">Email: okogbulegoodluck@gmail.com</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Toast notification for copy feedback -->
+    <div class="toast" id="copyToast">Copied to clipboard!</div>
+  </body>
+</html>
